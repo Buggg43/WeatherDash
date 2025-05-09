@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <UserSecretsId>86219113-d683-4050-9903-9ab902ed6566</UserSecretsId>
   </PropertyGroup>
 
 </Project>

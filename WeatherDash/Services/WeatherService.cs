@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using WeatherDash.Models;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace WeatherDash.Services
@@ -15,10 +16,16 @@ namespace WeatherDash.Services
     internal class WeatherService
     {
         private readonly HttpClient _httpClient = new HttpClient();
+        private string apiKey;
+
+        public WeatherService()
+        {
+            var secrets = JsonSerializer.Deserialize<Dictionary<string, string>>
+                (File.ReadAllText("secrets.json"));
+            apiKey = secrets["OpenWeatherMapAPIKey"] ?? throw new Exception("Brak API key!");
+        }
         public async Task<WeatherModel?> GetWeatherAsync(string city)
         {
-            string apiKey = "d9c99dc0f3769956182975d86eda4020";
-
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={Uri.EscapeDataString(city)}&appid={apiKey}&units=metric";
             try 
             { 
