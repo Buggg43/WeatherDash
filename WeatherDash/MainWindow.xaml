@@ -1,56 +1,74 @@
 ﻿<Window x:Class="WeatherDash.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WeatherDash"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Weather Dashboard" Height="400" Width="300"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <DropShadowEffect x:Key="DropShadow"
+                          ShadowDepth="4"
+                          Color="Black"
+                          Opacity="0.25"
+                          BlurRadius="10"/>
+    </Window.Resources>
+
+    <Grid Background="#F0F0F0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBox 
-            Grid.Row="0"
-            Grid.Column="0"
-            Margin="10"
-            FontSize="16"
-            Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
-        
-        <Button 
-            Grid.Row="1"
-            Grid.Column="0"
-            Margin="10"
-            FontSize="16"
-            Content="Szukaj"
-            Command="{Binding SearchCommand}"/>
-        
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Margin="10"
-            FontSize="24"
-            Text="{Binding Temperature}"/>
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Margin="10,40,10,10"
-            FontSize="18"
-            Text="{Binding Description}"/>
+        <!-- Wprowadzanie miasta -->
+        <TextBox Grid.Row="0"
+                 Margin="20"
+                 FontSize="16"
+                 Height="35"
+                 Padding="5"
+                 Background="White"
+                 BorderBrush="#DDD"
+                 Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Image
-            Grid.Row="2"
-            Grid.Column="0"
-            Margin="10,100,10,10"
-            Height="100"
-            Width="100"
-            Source="{Binding Icon}"/>
+        <!-- Przycisk -->
+        <Button Grid.Row="1"
+                Margin="20,10"
+                Height="35"
+                FontSize="16"
+                Padding="5"
+                Content="Szukaj"
+                Background="#2196F3"
+                Foreground="White"
+                BorderThickness="0"
+                Cursor="Hand"
+                Command="{Binding SearchCommand}"/>
 
+        <!-- Wyświetlanie danych -->
+        <Border Grid.Row="2"
+                Margin="20"
+                Padding="20"
+                Background="White"
+                CornerRadius="12"
+                Effect="{StaticResource DropShadow}">
+
+            <StackPanel HorizontalAlignment="Center">
+
+                <TextBlock Text="{Binding Temperature}"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           TextAlignment="Center"
+                           Margin="0,10"/>
+
+                <TextBlock Text="{Binding Description}"
+                           FontSize="18"
+                           Foreground="Gray"
+                           TextAlignment="Center"/>
+
+                <Image Source="{Binding Icon}"
+                       Width="100"
+                       Height="100"
+                       Margin="0,20"/>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

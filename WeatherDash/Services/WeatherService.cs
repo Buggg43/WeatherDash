@@ -21,7 +21,7 @@ namespace WeatherDash.Services
         public WeatherService()
         {
             var secrets = JsonSerializer.Deserialize<Dictionary<string, string>>
-                (File.ReadAllText("secrets.json"));
+                (File.ReadAllText("C:\\Users\\kacpe\\source\\repos\\WeatherDash\\WeatherDash\\secrets.json"));
             apiKey = secrets["OpenWeatherMapAPIKey"] ?? throw new Exception("Brak API key!");
         }
         public async Task<WeatherModel?> GetWeatherAsync(string city)
